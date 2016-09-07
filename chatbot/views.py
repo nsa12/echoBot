@@ -20,8 +20,8 @@ pokemon_data = {"Bulbasaur":"http://img.pokemondb.net/artwork/bulbasaur.jpg","Iv
 def post_facebook_message(fbid, message_text):
 	post_message_url = 'https://graph.facebook.com/v2.6/me/messages?access_token=%s'%PAGE_ACCESS_TOKEN
 	try:
-		message_text = pokemon_data['message_text']
-	except:
+		message_text = pokemon_data[message_text]
+	except Exception as e:
 		message_text = 'not a pokemon'
 	response_msg = json.dumps({"recipient":{"id":fbid}, "message":{"text":message_text}})
 	status = requests.post(post_message_url, headers={"Content-Type": "application/json"},data=response_msg)
